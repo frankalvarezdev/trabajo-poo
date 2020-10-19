@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}{% endblock %}
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/xpendmusic-library.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/31ef3d53d0.js" crossorigin="anonymous"></script>
+    <script src="{% static 'moment.js' %}"></script>
+    <script>
+        moment.locale('es')
+    </script>
+</head>
+<body>
+    {% include 'components/header.html' %}
+    {% block body %}{% endblock %} 
+    <div style="padding-top: 70px;"></div>   
+    {% block content %}{% endblock %}
+    <div style="padding-bottom: 50px;"></div>
+</body>
+</html>

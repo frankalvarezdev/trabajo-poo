@@ -1,0 +1,80 @@
+<div>
+    {{product.name}}<br>
+    <span class="fromnow">ID: {{product.id}}</span> 
+</div>
+<div>
+    S/. {{product.price}}
+</div>
+<div>
+    {{product.category}}
+</div>
+<div>
+    {% if product.updated == False %}
+    <span id="date-text-{{product.date}}-{{section}}"></span><br>
+    <span class="fromnow">• Añadido</span> 
+    <span id="date-text-from-{{product.date}}-{{section}}" class="fromnow"></span>
+    <script>
+        var value = "{{product.date}}"
+        value = parseInt(value);
+        var value2 = moment(value).fromNow();
+        value = moment(value).format('L');
+        document.getElementById("date-text-{{product.date}}-{{section}}").innerHTML = value;
+        document.getElementById("date-text-from-{{product.date}}-{{section}}").innerHTML = value2;
+    </script>
+    {% else %}
+    <span id="date-text-{{product.update_date}}-{{section}}"></span><br>
+    <span class="fromnow">• Actualizado</span> 
+    <span id="date-text-from-{{product.update_date}}-{{section}}" class="fromnow"></span>
+    <script>
+        var value = "{{product.update_date}}"
+        var fecha = "{{product.date}}"
+        value = parseInt(value);
+        fecha = parseInt(fecha);
+        fecha = moment(fecha).format('L');
+        var value2 = moment(value).fromNow();
+        value = moment(value).format('L')
+        document.getElementById("date-text-{{product.update_date}}-{{section}}").innerHTML = fecha;
+        document.getElementById("date-text-from-{{product.update_date}}-{{section}}").innerHTML = value2;
+    </script>
+    {% endif %}
+
+</div>
+<div>
+    {% if  product.status == 100 %}
+        DISPONIBLE
+    {% elif product.status == 500 %}
+        AGOTADO
+    {% else %}
+        SOLICITADO
+    {% endif %}
+</div>
+<div>
+    {{product.quantity}}
+</div>
+<div>
+    {{product.sales}} Unidades<br>S/. {{ product.earnings | floatformat:-2 }}
+</div>
+<div>
+    <a onclick="editData('{{product.id}}', '{{section}}')" class="edit-box" data-tippy-content="Editar">
+        <i class="fas fa-edit"></i>
+    </a>
+    <a onclick="AbrirCaja('{{product.id}}', '{{section}}')" class="delete-box" data-tippy-content="Eliminar"> 
+        <i class="fas fa-trash"></i>
+    </a>
+    <form method="POST" style="display: inline;" data-tippy-content="+1">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{product.id}}">
+        <input type="hidden" name="operator" value="add">
+        <input type="hidden" name="quantity" value="{{product.quantity}}">
+        <input type="hidden" name="section" value="{{section}}">
+        <button class="edit-box"><i class="fas fa-plus"></i></button>
+    </form>
+    <form method="POST" style="display: inline;" data-tippy-content="-1">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{product.id}}">
+        <input type="hidden" name="operator" value="subtract">
+        <input type="hidden" name="quantity" value="{{product.quantity}}">
+        <input type="hidden" name="section" value="{{section}}">
+        <button class="delete-box"><i class="fas fa-minus"></i></button>
+    </form>
+</div>

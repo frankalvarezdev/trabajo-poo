@@ -1,0 +1,29 @@
+{% extends 'layout/default.html' %}
+
+{% block head %}
+<title>Vender</title>
+{% endblock %}
+{% block content %}
+<div class="x-container">
+    <h2>VENDER</h2>
+    
+    <form method="POST" class="x-form">
+        <div class="x-form-grid">
+            {% csrf_token %}
+            <div>
+                <label class="x-form-label">ID del producto:</label>
+                <input class="x-form-input" type="number" name="id" required>
+            </div>
+            <div>
+                <label class="x-form-label">Cantidad: </label>
+                <input class="x-form-input" type="number" name="quantity" value="0" required>
+            </div>
+        </div><br>
+
+        <button class="x-btn-success"><i class="fas fa-cart-plus"></i> Vender</button>
+        <a class="x-btn-danger" href="/" style="text-decoration: none; display: inline-block;">
+            Cancelar
+        </a>
+    </form>
+</div>
+{% endblock %}

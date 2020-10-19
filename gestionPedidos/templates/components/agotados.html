@@ -1,0 +1,20 @@
+<div id="vendidos" style="display: {{ver.agotados}};">
+    <h1 class="x-center-t">AGOTADOS</h1>
+
+    {% include 'components/product/list-title.html' %}
+    
+    
+    {% if agotados %}
+    <div class="form-pedidos-grid">
+        {% for product in agotados reversed %}
+        
+        {% include 'components/product/list.html' %}
+            
+        {% endfor %}
+    </div>
+    {% else %}
+    <h3 class="error-registros">No se encontraron registros</h3>
+    {% endif %}
+        
+        
+</div>

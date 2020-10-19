@@ -1,0 +1,25 @@
+{% extends 'layout/default.html' %}
+
+{% block head %}
+<title>Inicia Sesion</title>
+{% endblock %}
+
+{% block content %}
+<div class="x-container">
+    <h2 class="x-center" style="letter-spacing: 3px;">&nbsp;INICIAR SESION</h2>
+    <div class="x-center" style="margin-top: 20px;">
+        <form method="POST" class="x-form">
+            {% csrf_token %}
+            <div>
+                <label class="x-form-label" for="id_username">Nombre de usuario:</label>
+                <input class="x-form-input x-center-t" type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+            </div>
+            <div>
+                <label class="x-form-label" for="id_password">Contraseña:</label>
+                <input class="x-form-input x-center-t" type="password" name="password" autocomplete="current-password" required id="id_password">
+            </div>
+            <button class="x-btn-primary">Ingresar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

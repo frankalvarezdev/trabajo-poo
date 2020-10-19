@@ -1,0 +1,46 @@
+<style>
+    .header{
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        height: 3.5rem;
+        -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.21);
+        -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.21);
+        box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.21);
+        background-color: #ffffff;
+        z-index: 50;
+    }
+    .header-title{
+        font-weight: 800;
+        letter-spacing: 5px;
+        position: relative;
+        top: -12px;
+        left: 20px;
+    }
+    .cs{
+        position: fixed;
+        top: 1px;
+        right: 13px;
+        z-index: 100;
+    }
+    .cs a{
+        color: #ffffff;
+        text-decoration: none;
+    }
+</style>
+<div>
+    <div class="header">
+        <a href="/" style="color: black; text-decoration: none;">
+            <h1 class="header-title"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTMuODQ2IDkuODEybC43NzUtLjc3NmMtLjY3MS0uNjcyLTEuNTk3LTEuMDg3LTIuNjIxLTEuMDg3LTEuMDIzIDAtMS45NDkuNDE1LTIuNjIxIDEuMDg2bC43NzYuNzc2Yy40NzMtLjQ3MSAxLjEyNC0uNzYzIDEuODQ1LS43NjMuNzIyIDAgMS4zNzMuMjkyIDEuODQ2Ljc2NHptLTUuODQ2LTIuMTU1bC43OTYuNzk2Yy44Mi0uODIgMS45NTMtMS4zMjcgMy4yMDUtMS4zMjcgMS4yNTEgMCAyLjM4NC41MDcgMy4yMDQgMS4zMjdsLjc5NS0uNzk2Yy0xLjAyMy0xLjAyNC0yLjQzOC0xLjY1Ny0zLjk5OS0xLjY1Ny0xLjU2MiAwLTIuOTc3LjYzMy00LjAwMSAxLjY1N3ptOCA1LjE4N3YxMC4xNTZoLTh2LTEwLjE1NmMuNzcyLTEuMjI5IDIuMzg2LTEuODQ0IDQtMS44NDQgMS42MTMgMCAzLjIyNy42MTUgNCAxLjg0NHptLTUgMS4xNTdjMCAuNTUyLjQ0NyAxIDEgMXMxLS40NDggMS0xYzAtLjU1My0uNDQ3LTEuMDAxLTEtMS4wMDFzLTEgLjQ0OC0xIDEuMDAxem0zIDQuOTk5YzAtMS4xMDQtLjg5NS0yLTEuOTk4LTItMS4xMDYgMC0yLjAwMi44OTYtMi4wMDIgMiAwIDEuMTA1Ljg5NiAyIDIuMDAyIDIgMS4xMDMgMCAxLjk5OC0uODk1IDEuOTk4LTJ6bS0yLTFjLS41NTMgMC0xIC40NDgtMSAxcy40NDcgMSAxIDEgMS0uNDQ4IDEtMS0uNDQ3LTEtMS0xem0xMi0xN3YxNmgtNnYtMmg0di0xMmgtMjB2MTJoNHYyaC02di0xNmgyNHoiLz48L3N2Zz4=" style="height: 2rem;"> ION SAC</h1> 
+        </a>  
+        {% if user.is_authenticated %}
+        <div class="cs">
+            <a href="/logout">
+                <button class="x-btn-primary">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
+                </button>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,171 @@
+{% extends 'layout/default.html' %}
+
+{% block head %}
+<title>Inicio</title>
+<style>
+    .form-pedidos-grid{
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        row-gap: 15px;
+    }
+    .form-pedidos__title{
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+    .fromnow{
+        color: rgb(146, 146, 146);
+        font-size: 0.7rem;
+    }
+    .edit-box{
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px;
+        background-color: #00a3fa;
+        border-radius: 10px;
+        transition: 0.2s;
+        border: none;
+        outline: none;
+    }
+    .edit-box:hover{
+        transform: scale(1.05);
+    }
+    .edit-box:active{
+        transform: scale(0.95);
+    }
+    .edit-box i{
+        color: #ffffff;
+    }
+    .delete-box{
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px 6px;
+        background-color: #cf0e2e;
+        border-radius: 10px;
+        transition: 0.2s;
+        border: none;
+        outline: none;
+    }
+    .delete-box:hover{
+        transform: scale(1.05);
+    }
+    .delete-box:active{
+        transform: scale(0.95);
+    }
+    .delete-box i{
+        color: #ffffff;
+    }
+    .line{
+        width: 100%;
+        height: 2px;
+        background-color: rgb(146, 146, 146);
+        margin: 25px 0px 10px 0px;
+    }
+    .error-registros{
+        text-align: center;
+        color: #949494;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="x-alert-box" style="display: none;" id="caja-respuesta">
+    <div class="x-alert-box__content">
+        <div>
+            <div class="x-alert-box__title"><strong>¿Estas seguro de que quieres eliminar?</strong></div>
+            <button class="x-btn-success" id="r-si">
+                SI
+            </button>
+            <button class="x-btn-danger" id="r-no">
+                NO
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}  
+
+{% block content %}
+<div class="x-container">
+    <p>Bienvenido<strong> @{{ user.get_username }}</strong></p>
+    <div style="margin-top: 10px;">
+        <a href="/agregar" style="text-decoration: none;">
+            <button class="x-btn-primary">
+                <i class="fas fa-plus-circle"></i> AGREGAR NUEVO PRODUCTO
+            </button>
+        </a>&nbsp;&nbsp;
+        <a href="/vender">
+            <button class="x-btn-success">
+                <i class="fas fa-cart-plus"></i> VENDER
+            </button>
+        </a>
+    </div>
+    <div class="x-center">
+        <button class="x-btn-success" onclick=" mostrarProductos('no vendidos')">
+            <i class="fas fa-smile-beam"></i> VER PRODUCTOS DISPONIBLES
+        </button>&nbsp;&nbsp;
+        <button class="x-btn-danger" onclick=" mostrarProductos('vendidos')">
+            <i class="fas fa-frown"></i> VER PRODUCTOS AGOTADOS
+        </button>&nbsp;&nbsp;
+        <button class="x-btn-primary" onclick=" mostrarProductos('todos')">
+            <i class="fas fa-check-double"></i> MOSTRAR TODOS
+        </button>
+    </div>
+
+    {% include 'components/disponibles.html' with section="disponibles" %}
+    {% include 'components/agotados.html' with section="agotados" %}
+    {% include 'components/todos.html' with section="todos" %}
+
+</div>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+<script>
+    function AbrirCaja(id, section){
+        var caja = document.getElementById("caja-respuesta");
+        caja.style.display = "flex"
+        var si = document.getElementById("r-si");
+        var no = document.getElementById("r-no");
+
+        si.addEventListener("click", () => {
+            deleteData(id, section);
+        });
+        no.addEventListener("click", () => {
+            caja.style.display = "none";
+        });
+    };
+    function deleteData(id, section){
+        id = parseInt(id)
+        window.location.href = `/borrar/?section=${section}&id=${id}`;
+    };
+    function editData(id, section){
+        id = parseInt(id)
+        window.location.href = `/editar/?section=${section}&id=${id}`;
+    };
+    function mostrarProductos(data){
+        var vendidos = document.getElementById("vendidos")
+        var no_vendidos = document.getElementById("no-vendidos")
+        var todos = document.getElementById("todos")
+        
+        if(data == "vendidos"){
+            vendidos.style.display = "block";
+            no_vendidos.style.display = "none";
+            todos.style.display = "none";
+        } else if(data == "no vendidos"){
+            vendidos.style.display = "none";
+            no_vendidos.style.display = "block";
+            todos.style.display = "none";
+        } else{
+            vendidos.style.display = "none";
+            no_vendidos.style.display = "none";
+            todos.style.display = "block";
+        }
+    }
+    tippy('[data-tippy-content]');
+</script>
+<!-- <script>
+    d = new Date();
+    d = d.getTime();
+    var date1 = document.getElementById("date-form-1")
+    var date2 = document.getElementById("date-form-2")
+    date1.value = d;
+    date2.value = d;
+</script> -->
+{% endblock %}

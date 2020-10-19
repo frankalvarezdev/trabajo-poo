@@ -1,0 +1,68 @@
+{% extends 'layout/default.html' %}
+
+{% block head %}
+<title>Editar</title>
+<style>
+    .form-pedidos-grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 10px;
+    }
+    .body{
+        padding-top: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="x-container">
+    <div class="body"></div>
+    
+    {% for product in products %}
+    <form method="POST" class="x-form">
+        <div class="x-form-grid">
+            {% csrf_token %}
+            <div>
+                <label>Nombre del pedido: </label><br>
+                <input class="x-form-input" type="text" name="name" value="{{product.name}}">
+            </div>
+            <div>
+                <label>Precio: </label><br>
+                S/. <input class="x-form-input" type="number" name="price" step="0.01" value="{{product.price}}">
+            </div>
+            <div>
+                <label>Categoria: </label><br>
+                <select class="x-form-input" name="category">          
+                {% if  product.category == "ACCESORIOS DE COMPUTO"%}
+                    <option value="DISPOSITIVOS DE COMUNICACION">DISPOSITIVOS DE COMUNICACION</option>
+                    <option value="ACCESORIOS DE COMPUTO" selected>ACCESORIOS DE COMPUTO</option>
+                {% else %}
+                    <option value="DISPOSITIVOS DE COMUNICACION" selected>DISPOSITIVOS DE COMUNICACION</option>
+                    <option value="ACCESORIOS DE COMPUTO">ACCESORIOS DE COMPUTO</option>
+                {% endif %}                  
+                </select>
+            </div>
+            <div>
+                <label>Estado: </label><br>
+                <select class="x-form-input" name="status">
+                    <option value="200" selected>AUTOMÁTICO</option>
+                    <option value="100">DISPONIBLE</option>
+                    <option value="300">LIMITADO</option>
+                    <option value="500">AGOTADO</option>
+                </select>
+            </div>
+        </div><br>
+        <input type="hidden" name="id" value="{{product.id}}"> 
+        <input type="hidden" name="section" value="{{section}}">
+
+        <label class="x-form-label">Cantidad: </label>
+        <input class="x-form-input" type="number" name="quantity" value="{{product.quantity}}"><br>
+
+        <button class="x-btn-success">Actualizar</button>
+        <a class="x-btn-danger" href="/?ver={{section}}" style="text-decoration: none; display: inline-block;">
+            Cancelar
+        </a>
+    </form>
+    {% endfor %}
+</div>
+{% endblock %}

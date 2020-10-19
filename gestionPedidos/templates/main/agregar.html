@@ -1,0 +1,49 @@
+{% extends 'layout/default.html' %}
+
+{% block head %}
+<title>Agregar</title>
+{% endblock %}
+{% block content %}
+<div class="x-container">
+    <h2>Agregar nuevo produto</h2>
+    
+    <form method="POST" class="x-form">
+        <div class="x-form-grid">
+            {% csrf_token %}
+            <div>
+                <label class="x-form-label">Nombre del pedido:</label>
+                <input class="x-form-input" type="text" name="name" required>
+            </div>
+            <div>
+                <label class="x-form-label">Precio: </label>
+                S/. <input class="x-form-input" type="number" name="price" step="0.01" required>
+            </div>
+            <div>
+                <label class="x-form-label">Categoria: </label>
+                <select class="x-form-input" name="category" required>
+                    <option value="ACCESORIOS DE COMPUTO" selected>ACCESORIOS DE COMPUTO</option>
+                    <option value="DISPOSITIVOS DE COMUNICACION">DISPOSITIVOS DE COMUNICACION</option>
+                </select>
+            </div>
+            <div>
+                <label class="x-form-label">Estado: </label>
+                <select class="x-form-input" name="status">
+                    <option value="200" selected>AUTOMÁTICO</option>
+                    <option value="100">DISPONIBLE</option>
+                    <option value="300">LIMITADO</option>
+                    <option value="500">AGOTADO</option>
+                </select>
+            </div>
+        </div><br>
+
+        <label class="x-form-label">Cantidad: </label>
+        <input class="x-form-input" type="number" name="quantity" value="0"><br>
+
+        <button class="x-btn-success">Agregar</button>
+        <a class="x-btn-danger" href="/" style="text-decoration: none; display: inline-block;">
+            Cancelar
+        </a>
+    </form>
+</div>
+{% endblock %}
+    

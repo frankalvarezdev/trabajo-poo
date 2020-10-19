@@ -1,0 +1,18 @@
+<div id="no-vendidos" style="display: {{ver.disponibles}};">
+    <h1 class="x-center-t">DISPONIBLES</h1>
+    {% include 'components/product/list-title.html' %}
+
+    {% if disponibles %}
+    <div class="form-pedidos-grid">
+        {% for product in disponibles reversed %}
+        
+        {% include 'components/product/list.html' %}
+
+        {% endfor %}
+    </div>
+    {% else %}
+    <h3 class="error-registros">No se encontraron registros</h3>
+    {% endif %}
+        
+        
+</div>

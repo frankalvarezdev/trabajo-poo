@@ -1,0 +1,18 @@
+<div id="todos" style="display: {{ver.todos}};">
+    <h1 class="x-center-t">TODOS</h1>
+
+    {% include 'components/product/list-title.html' %}
+    
+    {% if products %}
+    <div class="form-pedidos-grid">
+        {% for product in products reversed %}
+        
+        {% include 'components/product/list.html' %}
+            
+        {% endfor %}
+    </div>
+    {% else %}
+    <h3 class="error-registros">No se encontraron registros</h3>
+    {% endif %}
+        
+</div>
